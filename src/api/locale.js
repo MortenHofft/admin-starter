@@ -11,6 +11,7 @@ function getMessages(locale) {
   return axios.get(`/_translations/${locale}.json`);
 }
 
+// Currently no support for rtl in Ant https://github.com/ant-design/ant-design/issues/4051
 function isRtlLocale(locale) {
   return Boolean(rtlLocale[locale]);
 }

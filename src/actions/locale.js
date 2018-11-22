@@ -1,16 +1,20 @@
-export const RECEIVE_LOCALE = 'RECEIVE_LOCALE'
-export const LOADING_LOCALE = 'LOADING_LOCALE'
+import localeApi from '../api/locale';
 
-export const receiveLocale = conversation => ({
-    type: RECEIVE_LOCALE,
-    conversation,
+export const LOCALE_SET = 'LOCALE_SET'
+export const LOCALE_LOADING = 'LOCALE_LOADING'
+
+export const setLocale = ({locale, messages}) => ({
+    type: LOCALE_SET,
+    locale: { locale, messages, loading: false }
 })
 
 export const loadingLocale = loading => ({
-    type: LOADING_LOCALE,
-    loading
+    type: LOCALE_LOADING,
+    locale: { loading }
 })
 
-export const fetchConversation = username => async (dispatch, getState) => {
-  dispatch(loadingLocale(true))
+export const changeLocale = locale => async (dispatch, getState) => {
+    dispatch(loadingLocale(true))
+    const messages = (await localeApi.getMessages(locale)).data
+    dispatch(setLocale({locale, messages}))
 }

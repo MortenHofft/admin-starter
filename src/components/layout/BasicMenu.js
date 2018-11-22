@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import { Menu, Icon } from 'antd';
-import StateContext from "../StateContext";
 import Logo from './Logo'
 
 const SubMenu = Menu.SubMenu;
@@ -64,12 +63,14 @@ class BasicMenu extends Component {
   }
 }
 
-let HOC = props => (
-  <StateContext.Consumer>
-    {({  }) => {
-      return <BasicMenu {...props} />;
-    }}
-  </StateContext.Consumer>
-);
+// let HOC = props => (
+//   <StateContext.Consumer>
+//     {({  }) => {
+//       return <BasicMenu {...props} />;
+//     }}
+//   </StateContext.Consumer>
+// );
 
-export default injectSheet(styles)(HOC);
+// redux here
+
+export default injectSheet(styles)(BasicMenu);

@@ -7,7 +7,6 @@ import SelectLang from './SelectLang'
 import UserMenu from './UserMenu'
 import enquire from 'enquire.js'
 import Logo from './Logo'
-import StateContext from "../StateContext";
 
 import './menu.css';
 
@@ -144,12 +143,14 @@ class SiteLayout extends Component {
 }
 
 
-let HOC = props => (
-  <StateContext.Consumer>
-    {({ locale }) => {
-      return <SiteLayout {...props} local={locale} />;
-    }}
-  </StateContext.Consumer>
-);
+// let HOC = props => (
+//   <StateContext.Consumer>
+//     {({ locale }) => {
+//       return <SiteLayout {...props} local={locale} />;
+//     }}
+//   </StateContext.Consumer>
+// );
 
-export default injectSheet(styles)(HOC);
+// redux here
+
+export default injectSheet(styles)(SiteLayout);

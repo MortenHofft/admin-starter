@@ -2,7 +2,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux'
 import injectSheet from 'react-jss';
 import { Menu, Icon, Dropdown, Avatar } from 'antd';
-import StateContext from "../../StateContext";
 import { loadingLocale } from '../../../actions/locale'
 
 const styles = {
@@ -49,13 +48,15 @@ class UserMenu extends PureComponent {
   }
 }
 
-let HOC = props => (
-  <StateContext.Consumer>
-    {() => {
-      return <UserMenu {...props} />;
-    }}
-  </StateContext.Consumer>
-);
+// let HOC = props => (
+//   <StateContext.Consumer>
+//     {() => {
+//       return <UserMenu {...props} />;
+//     }}
+//   </StateContext.Consumer>
+// );
+
+// redux here
 
 const mapStateToProps = state => ({
   locale: state.locale
@@ -65,4 +66,4 @@ const mapDispatchToProps = {
   dispatchLoadingLocale: loadingLocale,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(HOC))
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(UserMenu))
