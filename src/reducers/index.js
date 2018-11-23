@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import locale from './locale'
-import datasetSearch from './datasetSearch'
+import dataset from './dataset'
 
 export default combineReducers({
   locale,
-  datasetSearch
+  ...dataset
 })

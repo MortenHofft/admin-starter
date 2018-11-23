@@ -1,12 +1,11 @@
 import { connect } from 'react-redux'
-import { updateDatasetSearch } from '../../actions/datasetSearch'
+import { updateDatasetSearch } from '../../actions/datasetDeleted'
 import DataTable from './DataTable';
 
 const mapStateToProps = state => ({
-  loading: state.datasetSearch.loading,
-  result: state.datasetSearch.result,
-  q: state.datasetSearch.q,
-  searchable: true
+  loading: state.datasetDeleted.loading,
+  result: state.datasetDeleted.result,
+  searchable: false
 })
 
 const mapDispatchToProps = {

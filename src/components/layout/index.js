@@ -1,11 +1,11 @@
 
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
+import withWidth, { MEDIUM, LARGE, EXTRA_LARGE } from 'react-width'
 import { Layout, Icon, Drawer, Breadcrumb } from 'antd';
 import BasicMenu from './BasicMenu'
 import SelectLang from './SelectLang'
 import UserMenu from './UserMenu'
-import enquire from 'enquire.js'
 import Logo from './Logo'
 
 import './menu.css';
@@ -26,40 +26,8 @@ const menuCollapsedWidth = 80;
 
 class SiteLayout extends Component {
   constructor(props) {
-    super(props);
-
-    this.registerScreenListener = this.registerScreenListener.bind(this);
-
-    this.state = {
-      collapsed: true,
-      isMobile: false,
-    };
-  }
-
-  componentWillMount() {
-    this.registerScreenListener();
-  }
-
-  registerScreenListener() {
-    let queryMedium = "screen and (min-width: 600px)";
-    let queryLarge = "screen and (min-width: 900px)";
-    enquire.register(queryMedium, {
-      match: () => { this.setState({ isMobile: false }); },
-      unmatch: () => { this.setState({ isMobile: true }) },
-    });
-
-    if (!enquire.queries[queryMedium].matches()) {
-      this.setState({ isMobile: true });
-    }
-
-    enquire.register(queryLarge, {
-      match: () => { this.setState({ collapsed: false }) },
-      unmatch: () => { this.setState({ collapsed: true }) },
-    });
-
-    if (enquire.queries[queryLarge].matches()) {
-      this.setState({ collapsed: false });
-    }
+    super(props)
+    this.state = { false: true };
   }
 
   toggle = () => {
@@ -69,56 +37,61 @@ class SiteLayout extends Component {
   }
 
   render() {
-    const {classes} = this.props;
-    let contentMargin = this.state.collapsed ? menuCollapsedWidth : menuWidth;
-    if (this.state.isMobile) {
+    const { width, classes } = this.props;
+    const collapsed = typeof this.state.collapsed === 'boolean'
+      ? this.state.collapsed
+      : width < EXTRA_LARGE;
+    const isMobile = width < MEDIUM;
+
+    let contentMargin = collapsed ? menuCollapsedWidth : menuWidth;
+    if (isMobile) {
       contentMargin = 0;
     }
 
     const sideMenu = <React.Fragment>
-      {!this.state.isMobile && <Sider
-          className={classes.sider}
-          width={menuWidth}
-          trigger={null}
-          reverseArrow={true}
-          collapsible
-          collapsedWidth={menuCollapsedWidth}
-          breakpoint="lg"
-          onBreakpoint={(broken) => { console.log(broken); }}
-          onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
-          collapsed={this.state.collapsed}
-        >
-          <BasicMenu collapsed={this.state.collapsed} />
-        </Sider>
-        }
+      {!isMobile && <Sider
+        className={classes.sider}
+        width={menuWidth}
+        trigger={null}
+        reverseArrow={true}
+        collapsible
+        collapsedWidth={menuCollapsedWidth}
+        breakpoint="lg"
+        onBreakpoint={(broken) => { console.log(broken); }}
+        onCollapse={(collapsed, type) => { console.log(collapsed, type); }}
+        collapsed={collapsed}
+      >
+        <BasicMenu collapsed={collapsed} />
+      </Sider>
+      }
 
-        {this.state.isMobile && <Drawer
-          placement="left"
-          closable={false}
-          onClose={() => { this.setState({ collapsed: true }) }}
-          visible={!this.state.collapsed}
-          className="mainMenu__drawer"
-        >
-          <BasicMenu />
-        </Drawer>
-        }
+      {isMobile && <Drawer
+        placement="left"
+        closable={false}
+        onClose={() => { this.setState({ collapsed: true }) }}
+        visible={!collapsed}
+        className="mainMenu__drawer"
+      >
+        <BasicMenu />
+      </Drawer>
+      }
     </React.Fragment>;
 
     return (
       <Layout style={{ minHeight: '100vh' }}>
         {sideMenu}
         <Layout style={{ marginLeft: contentMargin + 'px' }}>
-          
+
           <Header style={{ background: '#fff', padding: 0, display: 'flex' }}>
-            {this.state.isMobile && <div className="headerLogo"><Logo style={{ height: '100px', flex: '0 0 auto' }} /></div>}
+            {isMobile && <div className="headerLogo"><Logo style={{ height: '100px', flex: '0 0 auto' }} /></div>}
             <Icon
-              style={{flex: '0 0 auto'}}
+              style={{ flex: '0 0 auto' }}
               className="menu-trigger"
-              type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
+              type={collapsed ? 'menu-unfold' : 'menu-fold'}
               onClick={this.toggle}
             />
-            <div style={{flex: '1 1 auto'}}></div>
-            <div className="header__secondary" style={{flex: '0 0 auto'}}>
+            <div style={{ flex: '1 1 auto' }}></div>
+            <div className="header__secondary" style={{ flex: '0 0 auto' }}>
               <UserMenu />
               <SelectLang />
             </div>
@@ -153,4 +126,4 @@ class SiteLayout extends Component {
 
 // redux here
 
-export default injectSheet(styles)(SiteLayout);
+export default injectSheet(styles)(withWidth()(SiteLayout));
