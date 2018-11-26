@@ -15,6 +15,6 @@ export const loadingLocale = loading => ({
 
 export const changeLocale = locale => async (dispatch, getState) => {
     dispatch(loadingLocale(true))
-    const messages = (await localeApi.getMessages(locale)).data
+    const messages = await localeApi.getMessages(locale)
     dispatch(setLocale({locale, messages}))
 }

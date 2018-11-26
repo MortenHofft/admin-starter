@@ -6,6 +6,7 @@ const mapStateToProps = state => ({
   loading: state.datasetSearch.loading,
   result: state.datasetSearch.result,
   q: state.datasetSearch.q,
+  error: state.error,
   searchable: true
 })
 

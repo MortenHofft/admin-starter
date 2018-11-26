@@ -8,9 +8,12 @@ import Home from './Home'
 import DatasetSearch from './Dataset/DatasetSearch'
 import DatasetDeleted from './Dataset/DatasetDeleted'
 import Dataset from './Dataset/Dataset'
+import AppContent from './AppContent'
 
 import Layout from './Layout'
 import BlockingLoader from './BlockingLoader'
+import Errors from './Errors'
+import Login from './Login'
 
 import './App.css'
 
@@ -26,9 +29,6 @@ import en from 'react-intl/locale-data/en'
 import fr from 'react-intl/locale-data/fr'
 addLocaleData([...da, ...en, ...fr])
 
-const guidRegex = "([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})?"; // Note the questionmark ? at the end
-
-
 const theme = {
   colorPrimary: 'deepskyblue'
 }
@@ -41,15 +41,11 @@ class App extends Component {
           <ThemeProvider theme={theme}>
             <React.Fragment>
               {this.props.locale.loading && <BlockingLoader />}
-              <Layout>
-                <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route exact path="/dataset/search" component={DatasetSearch} />
-                  <Route exact path="/dataset/deleted" component={DatasetDeleted} />
-                  <Route path="/dataset" component={Dataset} />
-                  <Route component={NotFound}/>
-                </Switch>
-              </Layout>
+              <Errors />
+              <Switch>
+                <Route exact path="/login" component={Login} />
+                <Route path="/" component={AppContent} />
+              </Switch>
             </React.Fragment>
           </ThemeProvider>
         </LocaleProvider>
