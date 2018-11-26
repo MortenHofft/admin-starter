@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
-import { Menu, Row, Col } from 'antd';
+import { Menu, Row } from 'antd';
 
 const DatasetMenu = (props) => {
   const { children, match } = props
@@ -23,7 +23,7 @@ const DatasetMenu = (props) => {
           <Menu.Item key="comments">Comments</Menu.Item>
           <Menu.Item key="constituentDatasets">Constituent datasets</Menu.Item>
         </Menu>
-        <div style={{ padding: 16 }}>
+        <div style={{ padding: 16, width: 'calc(100% - 256px)' }}>
           {children}
         </div>
       </Row>

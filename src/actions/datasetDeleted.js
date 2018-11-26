@@ -18,6 +18,6 @@ export const loadingDatasetResults = loading => ({
 export const updateDatasetSearch = query => async (dispatch, getState) => {
   dispatch(loadingDatasetResults(true))
   const currentState = getState().datasetSearch;
-  const result = (await searchDeletedDatasets({ limit: currentState.result.limit, offset: currentState.result.offset, ...query })).data
+  const result = (await searchDeletedDatasets({ limit: currentState.result.limit, offset: currentState.result.offset, ...query }))
   dispatch(setDatasetResults({ result, ...query }))
 }
