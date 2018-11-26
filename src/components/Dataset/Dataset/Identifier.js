@@ -1,7 +1,6 @@
 import React from "react";
 import { FormattedMessage } from "react-intl";
 import { Form, Input, Select, Button, Row, Col } from "antd";
-
 const FormItem = Form.Item;
 const Option = Select.Option;
 

@@ -12,3 +12,9 @@ export const searchDeletedDatasets = function(query) {
     headers: setHeaders()
   })
 };
+
+export const getDataset = function(key) {
+  return fetch(`http://api.gbif.org/v1/dataset/${key}`, {
+    headers: setHeaders()
+  })
+};

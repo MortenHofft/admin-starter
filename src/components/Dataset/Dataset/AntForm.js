@@ -1,5 +1,8 @@
 import React from 'react';
 import Identifier from './Identifier'
+import IdentifierForm from './VerticalForm'
+import PresentationItem from './Form/PresentationItem'
+
 import { FormattedMessage } from 'react-intl'
 import { Form, Input, Tooltip, Icon, Cascader, Select, Row, Col, Checkbox, Button, AutoComplete } from 'antd';
 
@@ -119,7 +122,11 @@ class RegistrationForm extends React.Component {
 
     return (
       <React.Fragment>
+        <PresentationItem label="some label" helpText={<FormattedMessage id="title" defaultMessage="Title" />}>
+          <div>sfdlkjhsd flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl k flkjhs dfkjh lsfdgklhlskdfjglksjdfhg lskjdhfgl kksjdhf <p>sdkfjh</p></div>
+        </PresentationItem>
         <Identifier />
+        <IdentifierForm />
         <Form onSubmit={this.handleSubmit}>
           <FormItem
             {...formItemLayout}

@@ -16,7 +16,7 @@ class AppContent extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/dataset/search" component={DatasetSearch} />
           <Route exact path="/dataset/deleted" component={DatasetDeleted} />
-          <Route path="/dataset" component={Dataset} />
+          <Route path="/dataset/:key" component={Dataset} />
           <Route component={NotFound}/>
         </Switch>
       </Layout>
