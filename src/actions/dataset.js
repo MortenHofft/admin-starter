@@ -22,13 +22,13 @@ export const setDataset = (dataset) => ({
 })
 
 export const loadDataset = key => async (dispatch, getState) => {
-  dispatch(loadingDataset(true))
-  const response = await getDataset(key)
-  if (response.ok) {
-    const result = await response.json();
-    dispatch(setDataset(result))
-  } else {
-    dispatch(loadingDatasetFailed(response))
-    dispatch(addError(response))
+  try{
+    dispatch(loadingDataset(true))
+    const dataset = (await getDataset(key)).data
+    
+    dispatch(setDataset(dataset))
+  } catch(err) {
+    dispatch(loadingDatasetFailed(err))
+    dispatch(addError(err))
   }
 }

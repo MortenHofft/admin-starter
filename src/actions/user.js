@@ -16,7 +16,7 @@ export const login = ({userName, password, remember}) => async (dispatch, getSta
   const response = await logUserIn(userName, password, remember)
   if (response.ok) {
     const user = await response.json()
-    const jwt = user.jwt
+    const jwt = user.token
     sessionStorage.setItem(JWT_STORAGE_NAME, jwt);
     if (remember) {
       localStorage.setItem(JWT_STORAGE_NAME, jwt);

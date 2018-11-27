@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { Menu, Row } from 'antd';
 
 const DatasetMenu = (props) => {
-  const { children, match } = props
+  const { children, dataset, match } = props
   return (
     <div style={{ background: 'white' }}>
       <Row type="flex" justify="start">
@@ -16,7 +16,7 @@ const DatasetMenu = (props) => {
         >
           <Menu.Item key="overview"><NavLink to={`/dataset/${match.params.key}`}>Overview</NavLink></Menu.Item>
           <Menu.Item key="contacts"><NavLink to={`/dataset/${match.params.key}/contacts`}>Contacts</NavLink></Menu.Item>
-          <Menu.Item key="endpoints">Endpoints</Menu.Item>
+          <Menu.Item key="endpoints">Endpoints ({dataset.endpoints.length})</Menu.Item>
           <Menu.Item key="identifiers">Identifiers</Menu.Item>
           <Menu.Item key="tags">Tags</Menu.Item>
           <Menu.Item key="machineTags">Machine tags</Menu.Item>
